@@ -1,0 +1,90 @@
+[
+  {
+    "id": "s1",
+    "name": "Palmera Washingtonia",
+    "notes": "Pleno sol, riego escaso",
+    "icon": null,
+    "photo": null,
+    "created": "2024-01-01"
+  },
+  {
+    "id": "s2",
+    "name": "Palmera Rubellini",
+    "notes": "Semisombra, riego moderado",
+    "icon": null,
+    "photo": null,
+    "created": "2024-01-01"
+  },
+  {
+    "id": "s3",
+    "name": "Coco Plumoso",
+    "notes": "Pleno sol",
+    "icon": null,
+    "photo": null,
+    "created": "2024-01-01"
+  },
+  {
+    "id": "s4",
+    "name": "Strelitzia",
+    "notes": "Sol / semisombra",
+    "icon": null,
+    "photo": null,
+    "created": "2024-01-01"
+  },
+  {
+    "id": "s5",
+    "name": "Naranjo",
+    "notes": "Pleno sol, riego moderado",
+    "icon": null,
+    "photo": null,
+    "created": "2024-01-01"
+  },
+  {
+    "id": "s6",
+    "name": "Falsa Pimienta",
+    "notes": "Pleno sol, muy resistente",
+    "icon": null,
+    "photo": null,
+    "created": "2024-01-01"
+  },
+  {
+    "id": "s7",
+    "name": "Lavanda",
+    "notes": "Pleno sol, riego escaso",
+    "icon": null,
+    "photo": null,
+    "created": "2024-01-01"
+  },
+  {
+    "id": "s8",
+    "name": "Romero",
+    "notes": "Pleno sol, muy resistente",
+    "icon": null,
+    "photo": null,
+    "created": "2024-01-01"
+  },
+  {
+    "id": "s9",
+    "name": "Ciprés",
+    "notes": "Pleno sol, riego escaso",
+    "icon": null,
+    "photo": null,
+    "created": "2024-01-01"
+  },
+  {
+    "id": "s10",
+    "name": "Olivo",
+    "notes": "Pleno sol, muy resistente",
+    "icon": null,
+    "photo": null,
+    "created": "2024-01-01"
+  },
+  {
+    "id": "s11",
+    "name": "Tuya",
+    "notes": "Sol / semisombra",
+    "icon": null,
+    "photo": null,
+    "created": "2024-01-01"
+  }
+]
