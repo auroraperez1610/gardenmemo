@@ -4,306 +4,325 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GardenMemo</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{
-  --g0:#0f1a0a;--g1:#1a2e10;--g2:#2D5016;--g3:#4A7C28;--g4:#7DB544;
-  --g6:#d4f0a8;--g7:#eaf5d4;--g8:#f5faea;
-  --sand:#F5F0E8;--sand2:#e8e3da;
-  --ink:#1a1a18;--ink2:#3d3d38;--ink3:#7a7a72;--ink4:#b0b0a8;
-  --white:#fff;--danger:#b91c1c;--radius:10px;--radius-sm:6px;
-}
+:root{--g0:#0f1a0a;--g1:#1a2e10;--g2:#2D5016;--g3:#4A7C28;--g4:#7DB544;--g7:#eaf5d4;--g8:#f5faea;--sand:#F5F0E8;--sand2:#e8e3da;--ink:#1a1a18;--ink2:#3d3d38;--ink3:#7a7a72;--ink4:#b0b0a8;--white:#fff;--danger:#b91c1c;--r:10px;--rsm:6px}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'DM Sans',sans-serif;background:var(--sand);color:var(--ink);min-height:100vh;font-size:14px;line-height:1.5}
+body{font-family:'DM Sans',sans-serif;background:var(--sand);color:var(--ink);min-height:100vh;font-size:14px}
 .shell{display:grid;grid-template-columns:210px 1fr;min-height:100vh}
-/* Sidebar */
 .sidebar{background:var(--g2);display:flex;flex-direction:column}
-.logo{padding:22px 18px 14px;border-bottom:1px solid rgba(255,255,255,.1)}
-.logo h1{font-size:16px;font-weight:600;color:#fff;letter-spacing:-.02em}
-.logo p{font-size:11px;color:rgba(255,255,255,.45);margin-top:1px}
+.logo{padding:20px 18px 14px;border-bottom:1px solid rgba(255,255,255,.1)}
+.logo h1{font-size:16px;font-weight:600;color:#fff}
+.logo p{font-size:11px;color:rgba(255,255,255,.4);margin-top:1px}
 nav{padding:10px 0;flex:1}
-.nav-item{display:flex;align-items:center;gap:9px;padding:9px 18px;cursor:pointer;color:rgba(255,255,255,.6);font-size:13px;border-left:3px solid transparent;transition:all .15s}
-.nav-item:hover{color:#fff;background:rgba(255,255,255,.07)}
-.nav-item.active{color:#fff;background:rgba(255,255,255,.11);border-left-color:var(--g4)}
-.nav-item svg{width:15px;height:15px;flex-shrink:0}
-.sidebar-foot{padding:14px 18px;border-top:1px solid rgba(255,255,255,.08);font-size:10px;color:rgba(255,255,255,.3)}
-/* Main */
+.ni{display:flex;align-items:center;gap:9px;padding:9px 18px;cursor:pointer;color:rgba(255,255,255,.6);font-size:13px;border-left:3px solid transparent;transition:all .15s}
+.ni:hover{color:#fff;background:rgba(255,255,255,.07)}
+.ni.active{color:#fff;background:rgba(255,255,255,.11);border-left-color:var(--g4)}
+.ni svg{width:15px;height:15px;flex-shrink:0}
+.sf{padding:14px 18px;border-top:1px solid rgba(255,255,255,.08)}
+.sf-user{font-size:12px;color:rgba(255,255,255,.6);margin-bottom:6px}
+.sf-role{display:inline-block;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:500;background:rgba(255,255,255,.15);color:#fff;margin-bottom:8px}
 .main{overflow:hidden;display:flex;flex-direction:column}
 .topbar{background:var(--white);border-bottom:1px solid var(--sand2);padding:0 26px;height:54px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
-.topbar h2{font-size:15px;font-weight:500;letter-spacing:-.02em}
+.topbar h2{font-size:15px;font-weight:500}
 .badge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11px;font-weight:500;background:var(--g7);color:var(--g2)}
 .content{padding:24px;overflow-y:auto;flex:1}
 .panel{display:none}.panel.active{display:block}
-/* Cards */
-.card{background:var(--white);border:1px solid var(--sand2);border-radius:var(--radius);padding:18px 22px;margin-bottom:14px}
-.card-title{font-size:11px;font-weight:500;color:var(--ink3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px}
-/* Buttons */
-.btn{display:inline-flex;align-items:center;gap:6px;padding:7px 15px;border-radius:var(--radius-sm);border:1px solid var(--sand2);background:var(--white);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--ink2);transition:all .15s}
+.card{background:var(--white);border:1px solid var(--sand2);border-radius:var(--r);padding:18px 22px;margin-bottom:14px}
+.ct{font-size:11px;font-weight:500;color:var(--ink3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:7px 15px;border-radius:var(--rsm);border:1px solid var(--sand2);background:var(--white);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--ink2);transition:all .15s}
 .btn:hover{border-color:#bbb;background:var(--sand)}
 .btn.primary{background:var(--g2);border-color:var(--g2);color:#fff}
 .btn.primary:hover{background:var(--g1);border-color:var(--g1)}
+.btn.secondary{background:var(--g7);border-color:var(--g4);color:var(--g1)}
 .btn.danger{color:var(--danger);border-color:transparent;background:none}
 .btn.danger:hover{background:#fef2f2}
 .btn.sm{padding:4px 10px;font-size:12px}
 .btn.lg{padding:10px 22px;font-size:14px}
 .btn:disabled{opacity:.4;pointer-events:none}
-/* Form */
-.form-grid{display:grid;gap:12px}
+.fg{display:grid;gap:12px}.fg2{grid-template-columns:1fr 1fr}
 .field{display:flex;flex-direction:column;gap:4px}
 label{font-size:12px;font-weight:500;color:var(--ink3)}
-input,textarea{padding:8px 11px;border:1px solid var(--sand2);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:13px;color:var(--ink);background:var(--white);transition:border-color .15s;width:100%}
-input:focus,textarea:focus{outline:none;border-color:var(--g3)}
+input,textarea,select{padding:8px 11px;border:1px solid var(--sand2);border-radius:var(--rsm);font-family:'DM Sans',sans-serif;font-size:13px;color:var(--ink);background:var(--white);transition:border-color .15s;width:100%}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--g3)}
 textarea{resize:vertical;min-height:56px}
-/* Upload */
-.upload-zone{border:1.5px dashed var(--sand2);border-radius:var(--radius);padding:18px;text-align:center;cursor:pointer;color:var(--ink3);font-size:13px;transition:all .15s;background:var(--sand)}
-.upload-zone:hover{border-color:var(--g3);background:var(--g8)}
-.upload-icon{width:30px;height:30px;margin:0 auto 6px;display:block;opacity:.35}
+.uz{border:1.5px dashed var(--sand2);border-radius:var(--r);padding:18px;text-align:center;cursor:pointer;color:var(--ink3);font-size:13px;transition:all .15s;background:var(--sand)}
+.uz:hover{border-color:var(--g3);background:var(--g8)}
 .hint{font-size:11px;color:var(--ink4);margin-top:3px}
 /* Catalog */
-.catalog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
-.sp-card{background:var(--white);border:1px solid var(--sand2);border-radius:var(--radius);overflow:hidden;transition:border-color .15s}
-.sp-card:hover{border-color:var(--g4)}
-.sp-thumb{width:100%;aspect-ratio:1;object-fit:contain;background:var(--sand);display:block}
-.sp-dot{width:100%;aspect-ratio:1;background:var(--g7);display:flex;align-items:center;justify-content:center}
-.sp-dot-inner{width:52px;height:52px;border-radius:50%;background:var(--g4);border:2px solid var(--g3)}
-.sp-info{padding:10px 12px}
-.sp-name{font-size:13px;font-weight:500;color:var(--ink)}
-.sp-notes{font-size:11px;color:var(--ink4);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sp-actions{display:flex;gap:6px;padding:0 10px 10px}
+.cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.sc{background:var(--white);border:1px solid var(--sand2);border-radius:var(--r);overflow:hidden;transition:border-color .15s}
+.sc:hover{border-color:var(--g4)}
+.sc-thumb{width:100%;aspect-ratio:1;object-fit:contain;background:var(--sand);display:block}
+.sc-dot{width:100%;aspect-ratio:1;background:var(--g7);display:flex;align-items:center;justify-content:center}
+.sc-dot-i{width:48px;height:48px;border-radius:50%;background:var(--g4);border:2px solid var(--g3)}
+.sc-info{padding:10px 12px}
+.sc-name{font-size:13px;font-weight:500}
+.sc-notes{font-size:11px;color:var(--ink4);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sc-actions{display:flex;gap:5px;padding:0 10px 10px;flex-wrap:wrap}
 /* Selector */
-.sel-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px}
-.sel-card{background:var(--sand);border:1.5px solid var(--sand2);border-radius:var(--radius-sm);padding:8px;text-align:center;cursor:pointer;transition:all .15s;position:relative}
-.sel-card:hover{border-color:var(--g3)}
-.sel-card.selected{border-color:var(--g3);background:var(--g8)}
-.sel-thumb{width:44px;height:44px;object-fit:contain;margin:0 auto 4px;display:block;background:var(--white);border-radius:4px}
-.sel-dot{width:44px;height:44px;border-radius:50%;background:var(--g4);border:2px solid var(--g3);margin:0 auto 4px}
-.sel-name{font-size:11px;font-weight:500;color:var(--ink2);line-height:1.2}
-.sel-check{position:absolute;top:4px;right:4px;width:15px;height:15px;background:var(--g2);border-radius:50%;display:none;align-items:center;justify-content:center}
-.sel-card.selected .sel-check{display:flex}
+.sg{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px}
+.sk{background:var(--sand);border:1.5px solid var(--sand2);border-radius:var(--rsm);padding:8px;text-align:center;cursor:pointer;transition:all .15s;position:relative}
+.sk:hover{border-color:var(--g3)}
+.sk.sel{border-color:var(--g3);background:var(--g8)}
+.sk-thumb{width:44px;height:44px;object-fit:contain;margin:0 auto 4px;display:block;background:var(--white);border-radius:4px}
+.sk-dot{width:44px;height:44px;border-radius:50%;background:var(--g4);border:2px solid var(--g3);margin:0 auto 4px}
+.sk-name{font-size:11px;font-weight:500;color:var(--ink2);line-height:1.2}
+.sk-chk{position:absolute;top:4px;right:4px;width:15px;height:15px;background:var(--g2);border-radius:50%;display:none;align-items:center;justify-content:center}
+.sk.sel .sk-chk{display:flex}
 /* Tags */
 .tags{display:flex;flex-wrap:wrap;gap:5px;min-height:26px;padding-top:8px;border-top:1px solid var(--sand2);margin-top:8px}
 .tag{display:inline-flex;align-items:center;gap:4px;background:var(--g7);color:var(--g1);border-radius:20px;padding:3px 9px 3px 5px;font-size:12px;font-weight:500}
 .tag img{width:16px;height:16px;object-fit:contain;border-radius:50%;background:#fff}
 .tag .tdot{width:16px;height:16px;border-radius:50%;background:var(--g4);flex-shrink:0}
 .tag button{background:none;border:none;cursor:pointer;color:var(--g3);font-size:14px;line-height:1;padding:0 0 0 2px}
+/* Projects */
+.pg{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.pj{background:var(--white);border:1px solid var(--sand2);border-radius:var(--r);overflow:hidden;transition:border-color .15s}
+.pj:hover{border-color:var(--g4)}
+.pj-plan{width:100%;height:120px;object-fit:cover;background:var(--sand);display:block}
+.pj-plan-empty{width:100%;height:120px;background:var(--g7);display:flex;align-items:center;justify-content:center;color:var(--g3);font-size:13px}
+.pj-body{padding:12px 14px}
+.pj-name{font-size:14px;font-weight:500}
+.pj-addr{font-size:12px;color:var(--ink3);margin-top:2px}
+.pj-date{font-size:11px;color:var(--ink4);margin-top:4px}
+.pj-actions{display:flex;gap:5px;padding:0 12px 12px;flex-wrap:wrap}
 /* Legend preview */
-.leg-band{display:flex;flex-wrap:wrap;gap:8px}
-.leg-item{display:flex;flex-direction:column;align-items:center;gap:3px;min-width:56px}
-.leg-item img{width:48px;height:48px;object-fit:contain;background:var(--sand);border-radius:5px;border:1px solid var(--sand2)}
-.leg-dot{width:48px;height:48px;border-radius:50%;background:var(--g4);border:2px solid var(--g3)}
-.leg-item span{font-size:10px;color:var(--ink3);text-align:center;line-height:1.2;max-width:60px}
-/* Steps */
+.lb{display:flex;flex-wrap:wrap;gap:8px}
+.li{display:flex;flex-direction:column;align-items:center;gap:3px;min-width:56px}
+.li img{width:48px;height:48px;object-fit:contain;background:var(--sand);border-radius:5px;border:1px solid var(--sand2)}
+.li-dot{width:48px;height:48px;border-radius:50%;background:var(--g4);border:2px solid var(--g3)}
+.li span{font-size:10px;color:var(--ink3);text-align:center;line-height:1.2;max-width:60px}
+/* Step */
 .step{display:flex;gap:12px;align-items:flex-start;margin-bottom:4px}
-.step-num{width:24px;height:24px;border-radius:50%;background:var(--g2);color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:14px}
-.step-body{flex:1}
-.step-body h3{font-size:14px;font-weight:500;margin-bottom:0;padding-top:14px}
+.sn{width:24px;height:24px;border-radius:50%;background:var(--g2);color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:14px}
+.sb{flex:1}.sb h3{font-size:14px;font-weight:500;padding-top:14px;margin-bottom:0}
 /* Alert */
-.alert{padding:9px 13px;border-radius:var(--radius-sm);font-size:13px;margin-top:8px}
+.alert{padding:9px 13px;border-radius:var(--rsm);font-size:13px;margin-top:8px}
 .alert.success{background:#f0fdf4;color:#166534;border:1px solid #bbf7d0}
 .alert.error{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
 .alert.info{background:#eff6ff;color:#1e40af;border:1px solid #bfdbfe}
 .empty{text-align:center;color:var(--ink4);padding:2rem;font-size:13px}
-/* Spinner */
 .spin{width:15px;height:15px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;display:inline-block}
 @keyframes sp{to{transform:rotate(360deg)}}
+/* Modal */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;z-index:100;display:none}
+.modal-bg.open{display:flex}
+.modal{background:var(--white);border-radius:var(--r);padding:24px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto}
+.modal h3{font-size:16px;font-weight:500;margin-bottom:16px}
+.modal-footer{display:flex;gap:8px;margin-top:16px;justify-content:flex-end}
 @media(max-width:620px){.shell{grid-template-columns:1fr}.sidebar{display:none}.content{padding:14px}}
 </style>
 </head>
 <body>
 <div class="shell">
 <aside class="sidebar">
-  <div class="logo"><h1>GardenMemo</h1><p>Memorias de jardín</p></div>
+  <div class="logo"><h1>GardenMemo</h1><p>Viveros Bolaga</p></div>
   <nav>
-    <div class="nav-item active" onclick="showPanel('catalogo',this)">
+    <div class="ni active" onclick="showPanel('proyectos',this)">
+      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2a1 1 0 011-1h10a1 1 0 011 1v12a1 1 0 01-1 1H3a1 1 0 01-1-1V2zm2 1v10h8V3H4zm1 1h6v1H5V4zm0 2h6v1H5V6zm0 2h4v1H5V8z"/></svg>
+      Proyectos
+    </div>
+    <div class="ni" onclick="showPanel('nuevo-proyecto',this)">
+      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5a.5.5 0 01.5.5v5h5a.5.5 0 010 1h-5v5a.5.5 0 01-1 0v-5h-5a.5.5 0 010-1h5v-5a.5.5 0 01.5-.5z"/></svg>
+      Nuevo proyecto
+    </div>
+    <div class="ni" onclick="showPanel('catalogo',this)">
       <svg viewBox="0 0 16 16" fill="currentColor"><path d="M3 2a1 1 0 00-1 1v10a1 1 0 001 1h10a1 1 0 001-1V3a1 1 0 00-1-1H3zm1 2h8v1H4V4zm0 2.5h8v1H4v-1zm0 2.5h5v1H4V9z"/></svg>
       Catálogo
     </div>
-    <div class="nav-item" onclick="showPanel('nueva',this)">
+    <div class="ni admin-only" onclick="showPanel('nueva-especie',this)">
       <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 2a.75.75 0 01.75.75v4.5h4.5a.75.75 0 010 1.5h-4.5v4.5a.75.75 0 01-1.5 0v-4.5h-4.5a.75.75 0 010-1.5h4.5v-4.5A.75.75 0 018 2z"/></svg>
       Nueva especie
     </div>
-    <div class="nav-item" onclick="showPanel('memoria',this)">
-      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M3 2a1 1 0 00-1 1v10a1 1 0 001 1h10a1 1 0 001-1V3a1 1 0 00-1-1H3zm2 3h6v1H5V5zm0 2h6v1H5V7zm0 2h4v1H5V9z"/></svg>
-      Generar memoria
-    </div>
   </nav>
-  <div class="sidebar-foot">GardenMemo v1.1</div>
+  <div class="sf">
+    <div class="sf-user" id="sf-user">—</div>
+    <div class="sf-role" id="sf-role">—</div><br>
+    <button class="btn sm" onclick="doLogout()">Cerrar sesión</button>
+  </div>
 </aside>
 
 <div class="main">
   <div class="topbar">
-    <h2 id="topbar-title">Catálogo de especies</h2>
-    <span class="badge" id="cat-count">0 especies</span>
+    <h2 id="topbar-title">Proyectos</h2>
+    <span class="badge" id="top-badge"></span>
   </div>
   <div class="content">
 
+    <!-- PROYECTOS -->
+    <div id="panel-proyectos" class="panel active">
+      <div id="projects-grid" class="pg">
+        <div class="empty" style="grid-column:1/-1">Cargando proyectos...</div>
+      </div>
+    </div>
+
+    <!-- NUEVO / EDITAR PROYECTO -->
+    <div id="panel-nuevo-proyecto" class="panel">
+      <div class="card">
+        <div class="ct" id="np-title">Datos del proyecto</div>
+        <input type="hidden" id="np-id">
+        <div class="fg fg2">
+          <div class="field"><label>Nombre / Parcela *</label><input type="text" id="np-name" placeholder="ej: Parcela 28"></div>
+          <div class="field"><label>Dirección</label><input type="text" id="np-addr" placeholder="ej: Urb. Pri al Sur"></div>
+        </div>
+      </div>
+      <div class="step"><div class="sn">1</div><div class="sb">
+        <h3>Plano del jardín</h3>
+        <div class="card" style="margin-top:10px">
+          <div class="uz" onclick="document.getElementById('np-plan-file').click()">
+            <div id="np-plan-prev">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin:0 auto 6px;display:block;opacity:.35"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+              Sube la imagen del plano<div class="hint">JPG o PNG</div>
+            </div>
+          </div>
+          <input type="file" id="np-plan-file" accept="image/*" style="display:none" onchange="handleFile(this,'np-plan-prev','np-plan')">
+        </div>
+      </div></div>
+      <div class="step"><div class="sn">2</div><div class="sb">
+        <h3>Especies del plano</h3>
+        <div class="card" style="margin-top:10px">
+          <div id="np-sel-grid" class="sg"></div>
+          <div id="np-sel-tags" class="tags"></div>
+        </div>
+      </div></div>
+      <div class="step"><div class="sn">3</div><div class="sb">
+        <h3>Vista previa leyenda</h3>
+        <div class="card" style="margin-top:10px">
+          <div id="np-legend" class="lb"><div class="empty" style="width:100%">Selecciona especies</div></div>
+        </div>
+      </div></div>
+      <div style="display:flex;gap:10px;margin-top:8px">
+        <button class="btn primary lg" id="np-save-btn" onclick="saveProject()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+          Guardar proyecto
+        </button>
+        <button class="btn primary lg" id="np-gen-btn" onclick="generateFromForm()" style="display:none">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v13M5 9l7 7 7-7M3 21h18"/></svg>
+          Guardar y generar PDF
+        </button>
+        <button class="btn" onclick="resetProjectForm()">Limpiar</button>
+      </div>
+      <div id="np-msg"></div>
+    </div>
+
     <!-- CATÁLOGO -->
-    <div id="panel-catalogo" class="panel active">
-      <div id="catalog-grid" class="catalog-grid">
+    <div id="panel-catalogo" class="panel">
+      <div id="catalog-grid" class="cg">
         <div class="empty" style="grid-column:1/-1">Cargando...</div>
       </div>
     </div>
 
     <!-- NUEVA ESPECIE -->
-    <div id="panel-nueva" class="panel">
+    <div id="panel-nueva-especie" class="panel">
       <div class="card">
-        <div class="card-title">Datos de la especie</div>
-        <div class="form-grid">
-          <div class="field">
-            <label>Nombre *</label>
-            <input type="text" id="new-name" placeholder="ej: Palmera Washingtonia">
-          </div>
-          <div class="field">
-            <label>Notas adicionales</label>
-            <textarea id="new-notes" placeholder="ej: Pleno sol, riego escaso. Zona de acceso."></textarea>
-          </div>
+        <div class="ct">Datos de la especie</div>
+        <input type="hidden" id="ns-id">
+        <div class="fg">
+          <div class="field"><label>Nombre *</label><input type="text" id="ns-name" placeholder="ej: Palmera Washingtonia"></div>
+          <div class="field"><label>Notas adicionales</label><textarea id="ns-notes" placeholder="ej: Pleno sol, riego escaso"></textarea></div>
         </div>
       </div>
       <div class="card">
-        <div class="card-title">Icono del plano (vista cenital)</div>
-        <div class="upload-zone" onclick="document.getElementById('icon-file').click()">
-          <div id="icon-prev">
-            <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
-            Haz clic para subir el icono cenital
-            <div class="hint">PNG con fondo transparente recomendado</div>
-          </div>
+        <div class="ct">Icono del plano (vista cenital)</div>
+        <div class="uz" onclick="document.getElementById('ns-icon-file').click()">
+          <div id="ns-icon-prev"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin:0 auto 6px;display:block;opacity:.35"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>Haz clic para subir el icono cenital<div class="hint">PNG transparente recomendado</div></div>
         </div>
-        <input type="file" id="icon-file" accept="image/*" style="display:none" onchange="handleFile(this,'icon-prev','icon')">
+        <input type="file" id="ns-icon-file" accept="image/*" style="display:none" onchange="handleFile(this,'ns-icon-prev','ns-icon')">
       </div>
       <div class="card">
-        <div class="card-title">Fotografía de referencia (opcional)</div>
-        <div class="upload-zone" onclick="document.getElementById('photo-file').click()">
-          <div id="photo-prev">
-            <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-            Haz clic para subir una fotografía
-          </div>
+        <div class="ct">Fotografía de referencia (opcional)</div>
+        <div class="uz" onclick="document.getElementById('ns-photo-file').click()">
+          <div id="ns-photo-prev"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin:0 auto 6px;display:block;opacity:.35"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>Haz clic para subir una fotografía</div>
         </div>
-        <input type="file" id="photo-file" accept="image/*" style="display:none" onchange="handleFile(this,'photo-prev','photo')">
+        <input type="file" id="ns-photo-file" accept="image/*" style="display:none" onchange="handleFile(this,'ns-photo-prev','ns-photo')">
       </div>
       <div style="display:flex;gap:10px">
         <button class="btn primary" onclick="saveSpecies()">Guardar en catálogo</button>
-        <button class="btn" onclick="clearForm()">Limpiar</button>
+        <button class="btn" onclick="clearSpeciesForm()">Limpiar</button>
       </div>
-      <div id="save-msg"></div>
-    </div>
-
-    <!-- GENERAR MEMORIA -->
-    <div id="panel-memoria" class="panel">
-
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-body">
-          <h3>Datos del proyecto</h3>
-          <div class="card" style="margin-top:10px">
-            <div class="form-grid" style="grid-template-columns:1fr 1fr">
-              <div class="field"><label>Nombre / Parcela *</label><input type="text" id="proj-name" placeholder="ej: Parcela 28"></div>
-              <div class="field"><label>Dirección</label><input type="text" id="proj-addr" placeholder="ej: Urb. Pri al Sur"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-body">
-          <h3>Plano del jardín</h3>
-          <div class="card" style="margin-top:10px">
-            <div class="upload-zone" onclick="document.getElementById('plan-file').click()">
-              <div id="plan-prev">
-                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
-                Sube la imagen del plano
-                <div class="hint">JPG o PNG, hasta 20MB</div>
-              </div>
-            </div>
-            <input type="file" id="plan-file" accept="image/*" style="display:none" onchange="handleFile(this,'plan-prev','plan')">
-          </div>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-body">
-          <h3>Especies del plano</h3>
-          <div class="card" style="margin-top:10px">
-            <div id="sel-grid" class="sel-grid"></div>
-            <div id="sel-tags" class="tags"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="step-num">4</div>
-        <div class="step-body">
-          <h3>Vista previa de la leyenda</h3>
-          <div class="card" style="margin-top:10px">
-            <div id="leg-preview" class="leg-band">
-              <div class="empty" style="width:100%">Selecciona especies</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div style="display:flex;gap:10px;margin-top:8px">
-        <button class="btn primary lg" id="gen-btn" onclick="generatePDF()">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v13M5 9l7 7 7-7M3 21h18"/></svg>
-          Descargar memoria PDF
-        </button>
-        <button class="btn" onclick="resetMemory()">Nueva memoria</button>
-      </div>
-      <div id="gen-msg"></div>
+      <div id="ns-msg"></div>
     </div>
 
   </div>
 </div>
 </div>
 
+<!-- Modal confirmación borrar -->
+<div class="modal-bg" id="del-modal">
+  <div class="modal">
+    <h3 id="del-modal-title">¿Eliminar?</h3>
+    <p id="del-modal-body" style="font-size:13px;color:var(--ink3)"></p>
+    <div class="modal-footer">
+      <button class="btn" onclick="closeModal('del-modal')">Cancelar</button>
+      <button class="btn danger" id="del-modal-confirm">Eliminar</button>
+    </div>
+  </div>
+</div>
+
 <script>
-let catalog=[], selected=[], b64={icon:null,photo:null,plan:null};
-const TITLES={catalogo:'Catálogo de especies',nueva:'Nueva especie',memoria:'Generar memoria'};
+let catalog=[], projects=[], selected=[], b64={}, userRole='team', editingProjectId=null;
+const TITLES={proyectos:'Proyectos','nuevo-proyecto':'Nuevo proyecto',catalogo:'Catálogo','nueva-especie':'Nueva especie'};
+
+async function init(){
+  const r=await fetch('/api/me');
+  const me=await r.json();
+  if(!me.user){window.location.href='/';return;}
+  userRole=me.role;
+  document.getElementById('sf-user').textContent=me.user;
+  document.getElementById('sf-role').textContent=me.role==='admin'?'Administrador':'Equipo';
+  // Ocultar secciones de admin si es equipo
+  if(me.role!=='admin'){
+    document.querySelectorAll('.admin-only').forEach(el=>el.style.display='none');
+  }
+  await Promise.all([loadCatalog(), loadProjects()]);
+}
 
 function showPanel(name,el){
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));
   document.getElementById('panel-'+name).classList.add('active');
   if(el)el.classList.add('active');
   document.getElementById('topbar-title').textContent=TITLES[name]||'';
+  if(name==='nuevo-proyecto' && !editingProjectId) resetProjectForm();
 }
 
+// ── Catálogo ────────────────────────────────────────────────────────
 async function loadCatalog(){
-  try{const r=await fetch('/api/catalog');catalog=await r.json();}catch(e){catalog=[];}
-  renderCatalog();renderSelector();
-  document.getElementById('cat-count').textContent=catalog.length+' especies';
+  const r=await fetch('/api/catalog');
+  catalog=await r.json();
+  renderCatalog();
+  renderSelector();
 }
 
 function renderCatalog(){
   const g=document.getElementById('catalog-grid');
-  document.getElementById('cat-count').textContent=catalog.length+' especies';
-  if(!catalog.length){g.innerHTML='<div class="empty" style="grid-column:1/-1">El catálogo está vacío</div>';return;}
+  if(!catalog.length){g.innerHTML='<div class="empty" style="grid-column:1/-1">Catálogo vacío</div>';return;}
   g.innerHTML=catalog.map(s=>`
-    <div class="sp-card">
-      ${s.icon?`<img class="sp-thumb" src="${s.icon}" alt="${s.name}">`:`<div class="sp-dot"><div class="sp-dot-inner"></div></div>`}
-      <div class="sp-info">
-        <div class="sp-name">${s.name}</div>
-        ${s.notes?`<div class="sp-notes">${s.notes}</div>`:''}
+    <div class="sc">
+      ${s.icon?`<img class="sc-thumb" src="${s.icon}" alt="${s.name}">`:`<div class="sc-dot"><div class="sc-dot-i"></div></div>`}
+      <div class="sc-info">
+        <div class="sc-name">${s.name}</div>
+        ${s.notes?`<div class="sc-notes">${s.notes}</div>`:''}
       </div>
-      <div class="sp-actions">
-        <button class="btn sm danger" onclick="delSpecies('${s.id}')">Eliminar</button>
+      <div class="sc-actions">
+        ${userRole==='admin'?`
+          <button class="btn sm secondary" onclick="editSpecies('${s.id}')">Editar</button>
+          <button class="btn sm danger" onclick="confirmDelete('especie','${s.id}','${s.name.replace(/'/g,"\\'")}')">Eliminar</button>
+        `:''}
       </div>
     </div>`).join('');
 }
 
 function renderSelector(){
-  const g=document.getElementById('sel-grid');
-  if(!catalog.length){g.innerHTML='<div class="empty" style="grid-column:1/-1">Añade especies al catálogo primero</div>';return;}
-  g.innerHTML=catalog.map(s=>{
-    const sel=selected.find(x=>x.id===s.id);
-    return`<div class="sel-card${sel?' selected':''}" onclick="toggleSp('${s.id}')">
-      <div class="sel-check"><svg width="8" height="8" viewBox="0 0 8 8" fill="none" stroke="white" stroke-width="1.5"><polyline points="1,4 3,6.5 7,1.5"/></svg></div>
-      ${s.icon?`<img class="sel-thumb" src="${s.icon}" alt="">`:`<div class="sel-dot"></div>`}
-      <div class="sel-name">${s.name}</div>
-    </div>`;
-  }).join('');
+  const g=document.getElementById('np-sel-grid');
+  if(!catalog.length){g.innerHTML='<div class="empty" style="grid-column:1/-1">Catálogo vacío</div>';return;}
+  g.innerHTML=catalog.map(s=>`
+    <div class="sk${selected.find(x=>x.id===s.id)?' sel':''}" onclick="toggleSp('${s.id}')">
+      <div class="sk-chk"><svg width="8" height="8" viewBox="0 0 8 8" fill="none" stroke="white" stroke-width="1.5"><polyline points="1,4 3,6.5 7,1.5"/></svg></div>
+      ${s.icon?`<img class="sk-thumb" src="${s.icon}" alt="">`:`<div class="sk-dot"></div>`}
+      <div class="sk-name">${s.name}</div>
+    </div>`).join('');
 }
 
 function toggleSp(id){
@@ -314,88 +333,213 @@ function toggleSp(id){
 }
 
 function renderTags(){
-  document.getElementById('sel-tags').innerHTML=selected.map(s=>`
+  document.getElementById('np-sel-tags').innerHTML=selected.map(s=>`
     <span class="tag">
       ${s.icon?`<img src="${s.icon}" alt="">`:`<div class="tdot"></div>`}
-      ${s.name}
-      <button onclick="toggleSp('${s.id}')">×</button>
+      ${s.name}<button onclick="toggleSp('${s.id}')">×</button>
     </span>`).join('');
 }
 
 function renderLegend(){
-  const c=document.getElementById('leg-preview');
+  const c=document.getElementById('np-legend');
   if(!selected.length){c.innerHTML='<div class="empty" style="width:100%">Selecciona especies</div>';return;}
   c.innerHTML=selected.map(s=>`
-    <div class="leg-item">
-      ${s.icon?`<img src="${s.icon}" alt="">`:`<div class="leg-dot"></div>`}
+    <div class="li">
+      ${s.icon?`<img src="${s.icon}" alt="">`:`<div class="li-dot"></div>`}
       <span>${s.name}</span>
     </div>`).join('');
 }
 
-async function handleFile(input,prevId,key){
-  const f=input.files[0];if(!f)return;
-  const r=new FileReader();
-  r.onload=e=>{
-    b64[key]=e.target.result;
-    document.getElementById(prevId).innerHTML=`<img src="${e.target.result}" style="max-height:160px;max-width:100%;border-radius:6px">`;
-  };
-  r.readAsDataURL(f);
-}
-
+// ── Especies ────────────────────────────────────────────────────────
 async function saveSpecies(){
-  const name=document.getElementById('new-name').value.trim();
-  if(!name){showMsg('save-msg','Escribe el nombre de la especie.','error');return;}
-  const r=await fetch('/api/catalog',{method:'POST',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({name,notes:document.getElementById('new-notes').value.trim(),icon:b64.icon,photo:b64.photo})});
-  const d=await r.json();
-  if(d.ok){catalog.push(d.species);renderCatalog();renderSelector();clearForm();showMsg('save-msg',`"${name}" guardada.`,'success');}
+  const name=document.getElementById('ns-name').value.trim();
+  if(!name){showMsg('ns-msg','Escribe el nombre.','error');return;}
+  const sid=document.getElementById('ns-id').value;
+  const payload={name,notes:document.getElementById('ns-notes').value.trim(),
+    icon:b64['ns-icon']||null, photo:b64['ns-photo']||null};
+
+  if(sid){
+    // Editar — solo enviar campos que han cambiado
+    const up={name:payload.name, notes:payload.notes};
+    if(b64['ns-icon']) up.icon=b64['ns-icon'];
+    if(b64['ns-photo']) up.photo=b64['ns-photo'];
+    await fetch(`/api/catalog/${sid}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(up)});
+    showMsg('ns-msg','Especie actualizada.','success');
+  } else {
+    const r=await fetch('/api/catalog',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    const d=await r.json();
+    if(!d.ok){showMsg('ns-msg','Error al guardar.','error');return;}
+    showMsg('ns-msg','Especie guardada.','success');
+  }
+  await loadCatalog();
+  clearSpeciesForm();
 }
 
-async function delSpecies(id){
-  if(!confirm('¿Eliminar esta especie?'))return;
-  await fetch(`/api/catalog/${id}`,{method:'DELETE'});
-  catalog=catalog.filter(s=>s.id!==id);
-  selected=selected.filter(s=>s.id!==id);
-  renderCatalog();renderSelector();renderTags();renderLegend();
+function editSpecies(id){
+  const s=catalog.find(x=>x.id===id);
+  if(!s)return;
+  document.getElementById('ns-id').value=s.id;
+  document.getElementById('ns-name').value=s.name;
+  document.getElementById('ns-notes').value=s.notes||'';
+  if(s.icon) document.getElementById('ns-icon-prev').innerHTML=`<img src="${s.icon}" style="max-height:120px;max-width:100%;border-radius:6px">`;
+  if(s.photo) document.getElementById('ns-photo-prev').innerHTML=`<img src="${s.photo}" style="max-height:120px;max-width:100%;border-radius:6px">`;
+  document.querySelector('.ni[onclick*="nueva-especie"]').click();
+  document.getElementById('panel-nueva-especie').querySelector('.ct').textContent='Editar especie';
 }
 
-function clearForm(){
-  document.getElementById('new-name').value='';
-  document.getElementById('new-notes').value='';
-  b64.icon=null;b64.photo=null;
-  document.getElementById('icon-prev').innerHTML=`<svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>Haz clic para subir el icono cenital<div class="hint">PNG con fondo transparente recomendado</div>`;
-  document.getElementById('photo-prev').innerHTML=`<svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>Haz clic para subir una fotografía`;
+function clearSpeciesForm(){
+  document.getElementById('ns-id').value='';
+  document.getElementById('ns-name').value='';
+  document.getElementById('ns-notes').value='';
+  b64['ns-icon']=null; b64['ns-photo']=null;
+  document.getElementById('ns-icon-prev').innerHTML=`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin:0 auto 6px;display:block;opacity:.35"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>Haz clic para subir el icono cenital<div class="hint">PNG transparente recomendado</div>`;
+  document.getElementById('ns-photo-prev').innerHTML=`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin:0 auto 6px;display:block;opacity:.35"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>Haz clic para subir una fotografía`;
+  document.querySelector('#panel-nueva-especie .ct').textContent='Datos de la especie';
 }
 
-async function generatePDF(){
-  const name=document.getElementById('proj-name').value.trim();
-  if(!name){showMsg('gen-msg','Escribe el nombre del proyecto.','error');return;}
-  if(!b64.plan){showMsg('gen-msg','Sube el plano del jardín.','error');return;}
-  if(!selected.length){showMsg('gen-msg','Selecciona al menos una especie.','error');return;}
-  const btn=document.getElementById('gen-btn');
-  btn.disabled=true;
-  btn.innerHTML='<span class="spin"></span> Generando PDF...';
+// ── Proyectos ────────────────────────────────────────────────────────
+async function loadProjects(){
+  const r=await fetch('/api/projects');
+  projects=await r.json();
+  renderProjects();
+}
+
+function renderProjects(){
+  const g=document.getElementById('projects-grid');
+  document.getElementById('top-badge').textContent=projects.length+' proyectos';
+  if(!projects.length){g.innerHTML='<div class="empty" style="grid-column:1/-1">No hay proyectos todavía. Crea el primero.</div>';return;}
+  g.innerHTML=projects.map(p=>`
+    <div class="pj">
+      ${p.plan?`<img class="pj-plan" src="${p.plan}" alt="">`:`<div class="pj-plan-empty">Sin plano</div>`}
+      <div class="pj-body">
+        <div class="pj-name">${p.name}</div>
+        ${p.address?`<div class="pj-addr">${p.address}</div>`:''}
+        <div class="pj-date">${formatDate(p.updated_at||p.created_at)}</div>
+      </div>
+      <div class="pj-actions">
+        <button class="btn sm primary" onclick="generatePDF('${p.id}','${p.name.replace(/'/g,"\\'")}')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v13M5 9l7 7 7-7M3 21h18"/></svg>
+          Generar PDF
+        </button>
+        ${p.pdf?`<button class="btn sm secondary" onclick="downloadPDF('${p.id}','${p.name.replace(/'/g,"\\'")}')">Descargar último</button>`:''}
+        <button class="btn sm" onclick="editProject('${p.id}')">Editar</button>
+        ${userRole==='admin'?`<button class="btn sm danger" onclick="confirmDelete('proyecto','${p.id}','${p.name.replace(/'/g,"\\'")}')">Eliminar</button>`:''}
+      </div>
+    </div>`).join('');
+}
+
+async function saveProject(){
+  const name=document.getElementById('np-name').value.trim();
+  if(!name){showMsg('np-msg','Escribe el nombre del proyecto.','error');return;}
+  const pid=document.getElementById('np-id').value;
+  const payload={name,address:document.getElementById('np-addr').value.trim(),
+    plan:b64['np-plan']||null, species:selected};
+
+  if(pid){
+    await fetch(`/api/projects/${pid}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    showMsg('np-msg','Proyecto actualizado.','success');
+    editingProjectId=null;
+  } else {
+    const r=await fetch('/api/projects',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    const d=await r.json();
+    if(!d.ok){showMsg('np-msg','Error al guardar.','error');return;}
+    document.getElementById('np-id').value=d.project.id;
+    editingProjectId=d.project.id;
+    document.getElementById('np-gen-btn').style.display='inline-flex';
+    showMsg('np-msg','Proyecto guardado. Ahora puedes generar el PDF.','success');
+  }
+  await loadProjects();
+}
+
+async function generateFromForm(){
+  await saveProject();
+  const pid=document.getElementById('np-id').value || editingProjectId;
+  if(pid) await generatePDF(pid, document.getElementById('np-name').value);
+}
+
+async function editProject(id){
+  const r=await fetch(`/api/projects/${id}`);
+  const p=await r.json();
+  editingProjectId=id;
+  document.getElementById('np-id').value=id;
+  document.getElementById('np-name').value=p.name;
+  document.getElementById('np-addr').value=p.address||'';
+  if(p.plan){b64['np-plan']=p.plan;document.getElementById('np-plan-prev').innerHTML=`<img src="${p.plan}" style="max-width:100%;max-height:200px;border-radius:8px">`;}
+  selected=(p.species||[]).map(s=>catalog.find(c=>c.id===s.id)||s).filter(Boolean);
+  renderSelector();renderTags();renderLegend();
+  document.getElementById('np-gen-btn').style.display='inline-flex';
+  document.getElementById('np-title').textContent='Editar proyecto';
+  document.querySelector('.ni[onclick*="nuevo-proyecto"]').click();
+}
+
+async function generatePDF(pid, name){
+  const btn=event?event.target:null;
+  if(btn){btn.disabled=true;btn.innerHTML='<span class="spin"></span>';}
   try{
-    const r=await fetch('/api/generate',{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({project_name:name,address:document.getElementById('proj-addr').value.trim(),plan_image:b64.plan,species:selected})});
+    const r=await fetch(`/api/generate/${pid}`,{method:'POST'});
     if(!r.ok)throw new Error();
     const blob=await r.blob();
     const a=document.createElement('a');
     a.href=URL.createObjectURL(blob);
-    a.download=`Memoria_${name.replace(/\s+/g,'_')}.pdf`;
+    a.download=`Memoria_${(name||pid).replace(/\s+/g,'_')}.pdf`;
     a.click();
-    showMsg('gen-msg','PDF descargado.','success');
-  }catch(e){showMsg('gen-msg','Error al generar el PDF.','error');}
-  btn.disabled=false;
-  btn.innerHTML='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v13M5 9l7 7 7-7M3 21h18"/></svg> Descargar memoria PDF';
+    await loadProjects();
+  }catch(e){alert('Error al generar el PDF.');}
+  if(btn){btn.disabled=false;btn.innerHTML='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v13M5 9l7 7 7-7M3 21h18"/></svg> Generar PDF';}
 }
 
-function resetMemory(){
-  document.getElementById('proj-name').value='';
-  document.getElementById('proj-addr').value='';
-  b64.plan=null;
-  document.getElementById('plan-prev').innerHTML=`<svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>Sube la imagen del plano<div class="hint">JPG o PNG, hasta 20MB</div>`;
+async function downloadPDF(pid, name){
+  const r=await fetch(`/api/projects/${pid}/pdf`);
+  if(!r.ok){alert('PDF no disponible');return;}
+  const blob=await r.blob();
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=`Memoria_${(name||pid).replace(/\s+/g,'_')}.pdf`;
+  a.click();
+}
+
+function resetProjectForm(){
+  editingProjectId=null;
+  document.getElementById('np-id').value='';
+  document.getElementById('np-name').value='';
+  document.getElementById('np-addr').value='';
+  b64['np-plan']=null;
+  document.getElementById('np-plan-prev').innerHTML=`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin:0 auto 6px;display:block;opacity:.35"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>Sube la imagen del plano<div class="hint">JPG o PNG</div>`;
   selected=[];renderSelector();renderTags();renderLegend();
+  document.getElementById('np-gen-btn').style.display='none';
+  document.getElementById('np-title').textContent='Datos del proyecto';
+}
+
+// ── Delete modal ─────────────────────────────────────────────────────
+function confirmDelete(type, id, name){
+  document.getElementById('del-modal-title').textContent=type==='especie'?'¿Eliminar especie?':'¿Eliminar proyecto?';
+  document.getElementById('del-modal-body').textContent=`Se eliminará "${name}" de forma permanente.`;
+  document.getElementById('del-modal-confirm').onclick=async()=>{
+    if(type==='especie'){
+      await fetch(`/api/catalog/${id}`,{method:'DELETE'});
+      await loadCatalog();
+    } else {
+      await fetch(`/api/projects/${id}`,{method:'DELETE'});
+      await loadProjects();
+    }
+    closeModal('del-modal');
+  };
+  document.getElementById('del-modal').classList.add('open');
+}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+
+// ── Helpers ───────────────────────────────────────────────────────────
+async function handleFile(input,prevId,key){
+  const f=input.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{b64[key]=e.target.result;document.getElementById(prevId).innerHTML=`<img src="${e.target.result}" style="max-height:160px;max-width:100%;border-radius:6px">`;};
+  r.readAsDataURL(f);
+}
+
+function formatDate(iso){
+  if(!iso)return'';
+  const d=new Date(iso);
+  return d.toLocaleDateString('es-ES',{day:'2-digit',month:'short',year:'numeric'});
 }
 
 function showMsg(id,msg,type){
@@ -404,7 +548,12 @@ function showMsg(id,msg,type){
   setTimeout(()=>el.textContent='',4000);
 }
 
-loadCatalog();
+async function doLogout(){
+  await fetch('/api/logout',{method:'POST'});
+  window.location.href='/';
+}
+
+init();
 </script>
 </body>
 </html>

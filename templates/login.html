@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GardenMemo — Acceso</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--g2:#2D5016;--g3:#4A7C28;--g4:#7DB544;--g7:#eaf5d4;--sand:#F5F0E8;--ink:#1a1a18;--ink3:#7a7a72;--white:#fff;--radius:10px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--sand);min-height:100vh;display:flex;align-items:center;justify-content:center}
+.box{background:var(--white);border-radius:16px;padding:40px 36px;width:100%;max-width:380px;box-shadow:0 4px 24px rgba(45,80,22,.10)}
+.logo-area{text-align:center;margin-bottom:28px}
+.logo-area h1{font-size:22px;font-weight:600;color:var(--g2);letter-spacing:-.02em}
+.logo-area p{font-size:13px;color:var(--ink3);margin-top:4px}
+.field{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+label{font-size:12px;font-weight:500;color:var(--ink3)}
+input{padding:9px 12px;border:1px solid #e0dbd2;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);background:var(--white);transition:border-color .15s;width:100%}
+input:focus{outline:none;border-color:var(--g3)}
+.btn{width:100%;padding:11px;border-radius:8px;border:none;background:var(--g2);color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:background .15s;margin-top:6px}
+.btn:hover{background:#1a2e10}
+.err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca;border-radius:6px;padding:9px 12px;font-size:13px;margin-top:10px;display:none}
+.hint{font-size:11px;color:var(--ink3);text-align:center;margin-top:16px}
+</style>
+</head>
+<body>
+<div class="box">
+  <div class="logo-area">
+    <h1>GardenMemo</h1>
+    <p>Viveros Bolaga — Memorias de jardín</p>
+  </div>
+  <div class="field">
+    <label>Usuario (solo admin)</label>
+    <input type="text" id="user" placeholder="Deja vacío si eres del equipo" autocomplete="username">
+  </div>
+  <div class="field">
+    <label>Contraseña *</label>
+    <input type="password" id="pass" placeholder="Contraseña" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+  </div>
+  <button class="btn" onclick="doLogin()">Entrar</button>
+  <div class="err" id="err">Contraseña incorrecta</div>
+  <p class="hint">El equipo solo necesita la contraseña de equipo</p>
+</div>
+<script>
+async function doLogin(){
+  const user=document.getElementById('user').value.trim();
+  const pass=document.getElementById('pass').value.trim();
+  if(!pass){document.getElementById('err').style.display='block';return;}
+  const r=await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user,password:pass})});
+  const d=await r.json();
+  if(d.ok) window.location.href='/';
+  else{document.getElementById('err').style.display='block';}
+}
+</script>
+</body>
+</html>
