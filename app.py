@@ -12,7 +12,8 @@ from reportlab.lib.enums import TA_CENTER, TA_LEFT
 from reportlab.graphics.shapes import Drawing, Circle
 from PIL import Image as PILImage
 
-app = Flask(__name__)
+import os
+app = Flask(__name__, template_folder=os.path.join(os.path.dirname(__file__), 'templates'))
 app.config['MAX_CONTENT_LENGTH'] = 32 * 1024 * 1024
 
 DATA_FILE = 'catalog.json'
